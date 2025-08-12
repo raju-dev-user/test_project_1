@@ -1,7 +1,66 @@
-<!-- Create an HTML index page for a coffee shop with a welcome heading,
-     three sections (Our Menu, About Us, Contact), dummy text, warm colors,
-     and centered layout -->
-     
-<!DOCTYPE html>
-
-
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coffee Shop</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f3e5ab;
+      color: #3e2723;
+    }
+    header {
+      background-color: #a1887f;
+      padding: 2rem 1rem;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    main {
+      display: flex;
+      flex-direction: column;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    section {
+      background-color: #d7ccc8;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 1rem 0;
+      padding: 1.5rem;
+      flex: 1;
+    }
+    @media (min-width: 768px) {
+      main {
+        flex-direction: row;
+      }
+      section {
+        margin: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Coffee Haven</h1>
+  </header>
+  <main>
+    <section id="menu">
+      <h2>Our Menu</h2>
+      <p>Explore a variety of coffees, teas, and freshly baked pastries.</p>
+    </section>
+    <section id="about">
+      <h2>About Us</h2>
+      <p>We are a cozy neighborhood cafe serving rich flavors and warm smiles.</p>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Reach out at contact@coffeehaven.com or visit us any day of the week.</p>
+    </section>
+  </main>
+</body>
+</html>
