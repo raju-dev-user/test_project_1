@@ -34,6 +34,19 @@
       padding: 1.5rem;
       flex: 1;
     }
+    #menu ul {
+      list-style: none;
+      padding: 0;
+    }
+    #menu li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #8d6e63;
+    }
+    #menu .price {
+      font-weight: bold;
+    }
     @media (min-width: 768px) {
       main {
         flex-direction: row;
@@ -51,7 +64,17 @@
   <main>
     <section id="menu">
       <h2>Our Menu</h2>
-      <p>Explore a variety of coffees, teas, and freshly baked pastries.</p>
+      <ul>
+        <li>Americano <span class="price">$6</span></li>
+        <li>Red Eye <span class="price">$6</span></li>
+        <li>Latte <span class="price">$6</span></li>
+        <li>Cappuccino <span class="price">$6</span></li>
+        <li>Flat White <span class="price">$6</span></li>
+        <li>Cafe Au Lait <span class="price">$6</span></li>
+        <li>Cortado <span class="price">$6</span></li>
+        <li>Macchiato <span class="price">$6</span></li>
+        <li>Mocha <span class="price">$6</span></li>
+      </ul>
     </section>
     <section id="about">
       <h2>About Us</h2>
