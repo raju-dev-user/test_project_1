@@ -1,89 +1,284 @@
 
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coffee Shop</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ChaiManzil — Tea First</title>
+  <meta name="description" content="ChaiManzil: hot beverages focused on South Asia. Tea first, coffee close behind." />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f3e5ab;
-      color: #3e2723;
+    :root{
+      --bg:#fff7ed;         /* amber-50 */
+      --ink:#1f2937;        /* stone-800 */
+      --muted:#6b7280;      /* stone-500-600 */
+      --accent:#92400e;     /* amber-800 */
+      --accent-soft:#fde68a;/* amber-200 */
+      --chip:#fffbeb;       /* amber-50 */
+      --card:#ffffff;
+      --border:#fcd34d;     /* amber-300 */
+      --ring:#f59e0b;       /* amber-500 */
+      --shadow: 0 10px 25px rgba(0,0,0,.06);
+      --radius: 20px;
+      --radius-lg: 26px;
+      --max: 1200px;
     }
-    header {
-      background-color: #a1887f;
-      padding: 2rem 1rem;
-    }
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    main {
-      display: flex;
-      flex-direction: column;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem;
-    }
-    section {
-      background-color: #d7ccc8;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      margin: 1rem 0;
-      padding: 1.5rem;
-      flex: 1;
-    }
-    #menu ul {
-      list-style: none;
-      padding: 0;
-    }
-    #menu li {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid #8d6e63;
-    }
-    #menu .price {
-      font-weight: bold;
-    }
-    @media (min-width: 768px) {
-      main {
-        flex-direction: row;
-      }
-      section {
-        margin: 1rem;
-      }
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; color:var(--ink); background:var(--bg);} 
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{max-width:var(--max); padding:0 16px; margin:0 auto}
+    .btn{display:inline-flex; align-items:center; gap:.5rem; background:var(--ink); color:#fff; border:0; padding:.8rem 1.1rem; border-radius:999px; cursor:pointer; box-shadow:var(--shadow); font-weight:600}
+    .btn.outline{background:#fff; color:var(--ink); border:1px solid var(--border)}
+    .chip{display:inline-flex; align-items:center; gap:.4rem; font-size:.78rem; padding:.35rem .6rem; border-radius:999px; border:1px solid var(--border); background:#fff}
+    .muted{color:var(--muted)}
+
+    /* Navbar */
+    header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(180%) blur(6px); background:rgba(255,247,237,.85); border-bottom:1px solid #fde68a}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:12px 0}
+    .brand{display:flex; align-items:center; gap:.6rem}
+    .brand-mark{height:36px; width:36px; border-radius:14px; background:#fde68a; display:grid; place-items:center; font-weight:700; color:#78350f}
+    nav a{font-size:.95rem; margin-left:22px}
+    nav a:hover{color:#78350f}
+
+    /* Sections */
+    section{padding:64px 0}
+    h1{font-size:clamp(2rem, 4.5vw, 3.2rem); line-height:1.15; margin:0}
+    h2{font-size:clamp(1.6rem, 3vw, 2.2rem); margin:0 0 8px}
+    h3{margin:0}
+    p{line-height:1.6}
+
+    /* Hero */
+    .hero{display:grid; gap:40px; align-items:center}
+    @media (min-width: 900px){.hero{grid-template-columns: 1.1fr .9fr}}
+    .hero-art{position:relative}
+    .hero-box{aspect-ratio: 4/3; border-radius: var(--radius-lg); background:linear-gradient(135deg, #fde68a, #fff);}    
+    .today-card{position:absolute; left:-20px; bottom:-20px; transform:rotate(-4deg); background:#fff; border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); padding:14px 16px; width:min(280px, 75vw)}
+    .today-card .title{font-weight:700; font-size:.92rem}
+    .today-card .text{font-size:.85rem; color:var(--muted)}
+
+    /* Tabs */
+    .tabs-header{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .tabs{display:inline-flex; background:#fde68a; border-radius:999px; padding:6px}
+    .tab-btn{border:0; background:transparent; padding:.6rem .9rem; border-radius:999px; cursor:pointer; font-weight:600}
+    .tab-btn[aria-selected="true"]{background:#fff; color:#78350f; box-shadow:var(--shadow)}
+    .grid{display:grid; gap:18px}
+    @media (min-width: 800px){.grid.cols-3{grid-template-columns: repeat(3, 1fr)}}
+    .card{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow)}
+    .card h4{margin:0 0 6px; font-size:1.05rem}
+    .tag{font-size:.7rem; color:#78350f; background:#fffbeb; border:1px solid var(--border); padding:.15rem .5rem; border-radius:999px}
+
+    /* Story */
+    .story{display:grid; gap:28px; align-items:center}
+    @media (min-width: 900px){.story{grid-template-columns: 1fr 1fr}}
+    .story-media{aspect-ratio: 16/9; border-radius: var(--radius-lg); background:#fff; border:1px solid var(--border); display:grid; place-items:center; color:var(--muted)}
+
+    /* Sourcing */
+    .cards-3{display:grid; gap:18px}
+    @media (min-width: 900px){.cards-3{grid-template-columns:repeat(3,1fr)}}
+
+    /* Newsletter */
+    .newsletter{display:grid; gap:18px; align-items:center}
+    @media (min-width: 900px){.newsletter{grid-template-columns: 1.2fr .8fr}}
+    .input{width:100%; padding:.9rem 1rem; border-radius:999px; border:1px solid var(--border); outline:none}
+    .input:focus{box-shadow:0 0 0 3px rgba(245,158,11,.25)}
+
+    /* Footer */
+    footer{border-top:1px solid var(--border); background:#fff}
+    .foot{display:grid; gap:24px; padding:40px 0}
+    @media (min-width: 800px){.foot{grid-template-columns: repeat(3,1fr)}}
+    .copyright{font-size:.8rem; color:var(--muted); text-align:center; padding-bottom:30px}
+
+    /* Location section */
+    #location .card{border-radius:26px}
   </style>
 </head>
 <body>
+  <!-- NAVBAR -->
   <header>
-    <h1>Welcome to Coffee Haven</h1>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-mark">CM</div>
+        <strong>ChaiManzil</strong>
+      </div>
+      <nav aria-label="Primary">
+        <a href="#menu">Menu</a>
+        <a href="#story">Our Story</a>
+        <a href="#sourcing">Sourcing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="btn" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Order Now</button>
+    </div>
   </header>
-  <main>
-    <section id="menu">
-      <h2>Our Menu</h2>
-      <ul>
-        <li>Americano <span class="price">$6</span></li>
-        <li>Red Eye <span class="price">$6</span></li>
-        <li>Latte <span class="price">$6</span></li>
-        <li>Cappuccino <span class="price">$6</span></li>
-        <li>Flat White <span class="price">$6</span></li>
-        <li>Cafe Au Lait <span class="price">$6</span></li>
-        <li>Cortado <span class="price">$6</span></li>
-        <li>Macchiato <span class="price">$6</span></li>
-        <li>Mocha <span class="price">$6</span></li>
+
+  <!-- HERO -->
+  <section class="container hero">
+    <div>
+      <h1>Taste the Soul of South Asia — One Cup at a Time</h1>
+      <p class="muted" style="margin-top:12px">At <strong>ChaiManzil</strong>, tea comes first. From kadak morning brews to elegant Himalayan sips, our menu celebrates regional traditions — and yes, we make a mean coffee too.</p>
+      <div style="margin-top:18px; display:flex; flex-wrap:wrap; gap:10px">
+        <span class="chip">🌿 Ethically Sourced</span>
+        <span class="chip">🔥 Small-Batch Roasted</span>
+        <span class="chip">🥤 No Artificial Additives</span>
+        <span class="chip">📍 South Asia Focus</span>
+      </div>
+      <div style="margin-top:22px; display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn" href="#menu">Explore Menu</a>
+        <a class="btn outline" href="#menu">See Tea Boxes</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="hero-box"></div>
+      <div class="today-card" role="note" aria-label="Today's Brew">
+        <div class="title">Today’s Brew</div>
+        <div class="text">Masala Chai simmered with fresh ginger & jaggery.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="container">
+    <div class="tabs-header">
+      <div class="tabs" role="tablist" aria-label="Beverage categories">
+        <button class="tab-btn" id="tab-tea" role="tab" aria-selected="true" aria-controls="panel-tea">Tea</button>
+        <button class="tab-btn" id="tab-coffee" role="tab" aria-selected="false" aria-controls="panel-coffee">Coffee</button>
+      </div>
+      <div class="muted" style="display:flex; align-items:center; gap:8px">🌿 Freshly brewed, responsibly sourced.</div>
+    </div>
+
+    <div id="panel-tea" role="tabpanel" aria-labelledby="tab-tea" style="margin-top:18px">
+      <div class="grid cols-3">
+        <!-- Tea cards -->
+        <div class="card"><div style="display:flex; justify-content:space-between; align-items:center"><h4>Masala Chai</h4><span class="tag">Signature</span></div><p class="muted">Bold Assam base simmered with cardamom, ginger, cinnamon, clove — the heartbeat of South Asian homes.</p></div>
+        <div class="card"><div style="display:flex; justify-content:space-between; align-items:center"><h4>Assam CTC</h4><span class="tag">Kadak</span></div><p class="muted">Strong, malty, and brisk. Perfect for a kadak cup with milk and sugar.</p></div>
+        <div class="card"><div style="display:flex; justify-content:space-between; align-items:center"><h4>Darjeeling First Flush</h4><span class="tag">Single Origin</span></div><p class="muted">Floral and light with muscatel hints from the Himalayan foothills.</p></div>
+        <div class="card"><div style="display:flex; justify-content:space-between; align-items:center"><h4>Kashmiri Kahwa</h4><span class="tag">Fragrant</span></div><p class="muted">Green tea with saffron, cardamom, and almond slivers for a golden, aromatic brew.</p></div>
+        <div class="card"><div style="display:flex; justify-content:space-between; align-items:center"><h4>Nilgiri Black</h4><span class="tag">Southern Hills</span></div><p class="muted">Clean, brisk, and versatile — lovely hot or iced.</p></div>
+        <div class="card"><div style="display:flex; justify-content:space-between; align-items:center"><h4>Tulsi Ginger Herbal</h4><span class="tag">Herbal</span></div><p class="muted">Caffeine-free comfort with holy basil, ginger heat, and soothing herbs.</p></div>
+      </div>
+    </div>
+
+    <div id="panel-coffee" role="tabpanel" aria-labelledby="tab-coffee" hidden style="margin-top:18px">
+      <div class="grid cols-3">
+        <!-- Coffee cards -->
+        <div class="card"><div style="display:flex; justify-content:space-between; align-items:center"><h4>South Indian Filter Coffee</h4><span class="tag">Classic</span></div><p class="muted">Arabica–Robusta blend, slow-brewed in a traditional filter. Frothy, nostalgic, and deeply satisfying.</p></div>
+        <div class="card"><div style="display:flex; justify-content:space-between; align-items:center"><h4>Single-Origin Arabica</h4><span class="tag">Estate</span></div><p class="muted">Medium roast showcasing chocolate and citrus notes from select estates.</p></div>
+        <div class="card"><div style="display:flex; justify-content:space-between; align-items:center"><h4>Cardamom Latte</h4><span class="tag">House Special</span></div><p class="muted">Espresso kissed with cardamom and velvety milk — a fragrant twist.</p></div>
+        <div class="card"><div style="display:flex; justify-content:space-between; align-items:center"><h4>Cold Brew</h4><span class="tag">Chilled</span></div><p class="muted">18-hour steep for a smooth, low-acid cup. Great straight or with milk.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="story" class="container story">
+    <div>
+      <h2>Our Story</h2>
+      <p class="muted">“Manzil” means destination. For us, it’s the cozy corner where steam curls from clay cups and conversation lingers. We partner with small gardens across Assam, Darjeeling, Nilgiris, and the Western Ghats to bring you seasonally fresh leaves and beans.</p>
+      <ul class="muted" style="margin-top:10px">
+        <li>Direct relationships with growers and cooperatives</li>
+        <li>Transparent supply chain and fair pay commitments</li>
+        <li>Blends developed in-house for authentic regional profiles</li>
       </ul>
-    </section>
-    <section id="about">
-      <h2>About Us</h2>
-      <p>We are a cozy neighborhood cafe serving rich flavors and warm smiles.</p>
-    </section>
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Reach out at contact@coffeehaven.com or visit us any day of the week.</p>
-    </section>
-  </main>
+    </div>
+    <div class="story-media">Add hero photo or short video here</div>
+  </section>
+
+  <!-- SOURCING -->
+  <section id="sourcing" class="container">
+    <h2>Sourcing & Sustainability</h2>
+    <div class="cards-3" style="margin-top:18px">
+      <div class="card"><h4>Assam & Dooars</h4><p class="muted">Strong black teas with a malty backbone. Rain-fed gardens along the Brahmaputra.</p></div>
+      <div class="card"><h4>Darjeeling</h4><p class="muted">High-altitude harvests for delicate, floral cups with famed muscatel notes.</p></div>
+      <div class="card"><h4>Nilgiris & Western Ghats</h4><p class="muted">Versatile blacks and exceptional coffee grown under shade in biodiverse estates.</p></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="container">
+    <div class="card" style="border-radius:26px">
+      <div class="newsletter" style="padding:22px">
+        <div>
+          <h3 style="font-size:1.4rem">Join the Chai Circle</h3>
+          <p class="muted">New harvest alerts, brewing tips, and members-only drops — one gentle email a month.</p>
+        </div>
+        <form id="newsletter-form" class="newsletter-form" aria-label="Newsletter signup">
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <input class="input" type="email" name="email" placeholder="you@example.com" aria-label="Email address" required />
+            <button class="btn" type="submit">Subscribe</button>
+          </div>
+          <p id="newsletter-msg" class="muted" style="margin-top:8px"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION (bottom of page content) -->
+  <section id="location" class="container">
+    <div class="card" style="padding:22px">
+      <h2 style="margin-bottom:8px">Our Location</h2>
+      <p class="muted" style="margin:0 0 12px">4022 Collier St, Beaumont, TX 77705</p>
+      <iframe
+        src="https://www.google.com/maps?q=4022%20Collier%20St,%20Beaumont,%20TX%2077705&output=embed"
+        width="100%"
+        height="320"
+        style="border:0; border-radius:16px"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="container foot">
+      <div>
+        <strong style="font-size:1.1rem">ChaiManzil</strong>
+        <p class="muted">Hot beverages rooted in South Asia. Tea first, coffee close behind.</p>
+      </div>
+      <div>
+        <div style="font-weight:600; margin-bottom:6px">Hours</div>
+        <p class="muted">Mon–Fri: 8am–8pm<br>Sat–Sun: 9am–9pm</p>
+      </div>
+      <div>
+        <div style="font-weight:600; margin-bottom:6px">Say hello</div>
+        <p class="muted">hello@chaimanzil.com<br>+91 00000 00000</p>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year"></span> ChaiManzil. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tabs logic (accessible)
+    const teaTab = document.getElementById('tab-tea');
+    const coffeeTab = document.getElementById('tab-coffee');
+    const teaPanel = document.getElementById('panel-tea');
+    const coffeePanel = document.getElementById('panel-coffee');
+
+    function selectTab(which){
+      const isTea = which === 'tea';
+      teaTab.setAttribute('aria-selected', isTea);
+      coffeeTab.setAttribute('aria-selected', !isTea);
+      teaPanel.hidden = !isTea;
+      coffeePanel.hidden = isTea;
+    }
+
+    teaTab.addEventListener('click', ()=> selectTab('tea'));
+    coffeeTab.addEventListener('click', ()=> selectTab('coffee'));
+
+    // Newsletter mock handler
+    const form = document.getElementById('newsletter-form');
+    const msg = document.getElementById('newsletter-msg');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = this.email.value.trim();
+      if(!email){ return; }
+      msg.textContent = 'Thanks! We\'ll be in touch soon.';
+      this.reset();
+    });
+  </script>
 </body>
+</html>
